@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@layer base {
+    body {
+        @apply bg-brand-base1-10 text-brand-base2-100;
+    }
+    h1 {
+        font-size: var(--text-2xl);
+        font-weight: bold;
+        color: var(--color-brand-base2-100);
+    }
+    h2 {
+        font-size: var(--text-xl);
+        font-weight: bold;
+        color: var(--color-brand-base2-100);
+    }
+    h3 {
+        font-size: var(--text-lg);
+        font-weight: bold;
+        color: var(--color-white);
+    }
+    select {
+        background-color: var(--color-brand-base1-10);
+        color: var(--color-brand-base2-100);
+    }
+    select option {
+        background-color: var(--color-brand-base1-10);
+        color: var(--color-brand-base2-100);
+    }
+}
+
+@theme {
+
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    --color-brand-base1-100: #00da4d;
+    --color-brand-base1-75: #37da70;
+    --color-brand-base1-50: #9CC0A7;
+    --color-brand-base1-25: #a1d6b3;
+    --color-brand-base1-10: #FFFFFF;
+
+    --color-brand-base2-100: #0c4959;
+    --color-brand-base2-75: #227488;
+    --color-brand-base2-50: #447b88;
+    --color-brand-base2-25: #668188;
+    --color-brand-base2-10: #7a8588;
+
+    --color-brand-accent1: #ff5b00  ;
+    --color-brand-accent2: #5461A8;
+    --color-brand-brown: #9E8C78;
+    --color-brand-base3: #72877C;
+}
