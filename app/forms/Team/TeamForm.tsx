@@ -2,7 +2,14 @@ import { FormProvider, SubmitHandler } from 'react-hook-form'
 import { useTeamForm } from './useTeamForm'
 import { TeamName } from './TeamName'
 import { TeamRoster } from './TeamRoster'
-import { addNewTeam, createTeam, MiniRoosU6Configuration, updateTeam } from '~/data'
+import {
+  addNewTeam,
+  createTeam,
+  MiniRoosU6Configuration,
+  updateTeam,
+  getListOfTeams,
+  setListOfTeams,
+} from '~/data'
 import { NewTeam } from './useTeamForm'
 import TeamConfiguration from './TeamConfiguration'
 import { useEffect, useState } from 'react'
@@ -58,6 +65,15 @@ export function TeamForm({ teamId }: { teamId?: string }) {
     }
   }
 
+  const deleteTeam = (teamId: string) => {
+    if (confirm('Are you sure you want to delete this team?')) {
+      const allTeams = getListOfTeams()
+      const newTeams = allTeams.filter((team) => team.id !== teamId)
+      setListOfTeams(newTeams)
+      navigate('..')
+    }
+  }
+
   return (
     <FormProvider {...formProps}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -67,11 +83,21 @@ export function TeamForm({ teamId }: { teamId?: string }) {
         <div
           className={joinClsx(
             'w-full flex flex-col rounded-lg p-4 text-brand-base1-10 font-bold',
-            readyToSubmit ? 'bg-brand-accent1' : 'bg-brand-brown',
+            readyToSubmit ? 'bg-brand-base2-100' : 'bg-brand-brown',
           )}
         >
           <button type="submit">{teamId !== undefined ? 'Save' : 'Create'} Team</button>
         </div>
+        {Boolean(teamId) && (
+          <>
+            <div className="h-8 w-full flex"></div>
+            <div className="w-full flex flex-col rounded-lg p-4 text-brand-base1-10 font-bold bg-brand-accent1">
+              <button type="button" onClick={() => deleteTeam(teamId)}>
+                Delete Team
+              </button>
+            </div>
+          </>
+        )}
       </form>
     </FormProvider>
   )

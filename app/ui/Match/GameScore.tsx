@@ -8,24 +8,6 @@ export type GameScoreProps = {
   opponentName: string
 }
 
-function ScoreElement({ score, inc, dec }: { score: number; inc: () => void; dec: () => void }) {
-  return (
-    <div>
-      <div className="col-span-1">
-        <button type="button" onClick={inc}>
-          <FaPlusCircle />
-        </button>
-      </div>
-      <div className="col-span-1">{score}</div>
-      <div className="col-span-1">
-        <button type="button" onClick={dec}>
-          <FaMinusCircle />
-        </button>
-      </div>
-    </div>
-  )
-}
-
 export function GameScore({ teamName, opponentName }: GameScoreProps) {
   const { watch, setValue } = useFormContext<InMatchForm>()
 
@@ -48,34 +30,40 @@ export function GameScore({ teamName, opponentName }: GameScoreProps) {
     setValue('opponentScore', (opponentScore ?? 0) - 1)
   }
 
+  const opponentShortName =
+    opponentName.length > 10 ? `${opponentName.substring(0, 7)}...` : opponentName
+
   return (
     <div className="justify-center items-center relative pb-4">
       <h1 className="font-bold p-2">Score</h1>
       <div className="rounded-2xl grid grid-cols-7 items-center justify-items-center">
-        <div className="col-span-3 font-bold text-2xl pb-2">{teamName}</div>
+        <div className="col-span-3 font-bold text-2xl text-center">{teamName}</div>
         <div className="col-span-1"></div>
-        <div className="col-span-3 font-bold text-2xl pb-2">{opponentName}</div>
-        <div className="col-span-1">
+        <div className="col-span-3 font-bold text-2xl text-center">{opponentShortName}</div>
+        <div className="col-span-7 h-4" />
+        <div className="col-span-1 align-middle inline-block pt-2">
           <button type="button" onClick={incTeamScore}>
-            <FaPlusCircle size={20} />
+            <FaPlusCircle size={24} />
           </button>
         </div>
-        <div className="col-span-1 font-bold text-2xl">{teamScore ?? 0}</div>
-        <div className="col-span-1">
+        <div className="col-span-1 font-bold text-2xl align-middle inline-block">
+          {teamScore ?? 0}
+        </div>
+        <div className="col-span-1 align-middle inline-block pt-2">
           <button type="button" className="w-full h-full" onClick={decTeamScore}>
-            <FaMinusCircle size={20} />
+            <FaMinusCircle size={24} />
           </button>
         </div>
         <div className="col-span-1" />
-        <div className="col-span-1">
+        <div className="col-span-1 pt-2">
           <button type="button" onClick={decOpponentScore}>
-            <FaMinusCircle size={20} />
+            <FaMinusCircle size={24} />
           </button>
         </div>
         <div className="col-span-1 font-bold text-2xl">{opponentScore ?? 0}</div>
-        <div className="col-span-1">
+        <div className="col-span-1 pt-2">
           <button type="button" onClick={incOpponentScore}>
-            <FaPlusCircle size={20} />
+            <FaPlusCircle size={24} />
           </button>
         </div>
       </div>

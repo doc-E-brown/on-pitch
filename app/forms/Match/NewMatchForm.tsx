@@ -4,7 +4,7 @@ import { SelectTeam } from './SelectTeam'
 import { TextInput } from 'app/ui/Input/TextInput'
 import { addNewMatch } from 'app/data'
 import { joinClsx } from '~/lib/utils'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { GiSoccerField } from 'react-icons/gi'
 import { Button } from '~/ui/Input'
 
@@ -15,21 +15,17 @@ export type StartMatchFormProps = {
 
 export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
   const formProps = useNewMatchForm()
-  const [showErrors, setShowErrors] = useState(false)
   const {
     handleSubmit,
     register,
     formState: { errors },
     watch,
-    setError,
-    clearErrors,
   } = formProps
 
   const opponentName = watch('opponentName', '')
 
   const doSubmit: SubmitHandler<NewMatch> = (data) => {
     if (data.opponentName.length === 0 || data.opponentName === '') {
-      setShowErrors(true)
       return
     }
     if (!errors.teamId && !errors.opponentName) {
@@ -39,22 +35,9 @@ export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
     }
   }
 
-  // const isValidOpponentName = () => {
-  //   console.log('Here', opponentName.length, errors.opponentName)
-  //   if (opponentName.length > 0) {
-  //     clearErrors('opponentName')
-  //   } else {
-  //     setError('opponentName', {
-  //       type: 'manual',
-  //       message: 'Opponent name is required',
-  //     })
-  //   }
-  // }
-
   useEffect(() => {
     if (opponentName.length > 0) {
       formProps.clearErrors('opponentName')
-      setShowErrors(false)
     }
   }, [opponentName])
 
@@ -79,7 +62,6 @@ export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
                   value: true,
                   message: 'Opponent name is required',
                 },
-                maxLength: 15,
               })}
               className={joinClsx(
                 'bg-brand-base1-10 text-brand-base2-100 pl-4',
@@ -97,7 +79,6 @@ export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
           <div className="w-full flex flex-col p-4">
             <Button
               type="submit"
-              // onClick={isValidOpponentName}
               className="bg-brand-accent2 font-extrabold text-lg rounded-lg h-12"
             >
               {onSubmitText}

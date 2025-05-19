@@ -1,18 +1,20 @@
 import { useNavigate } from 'react-router'
 import { FormProvider, SubmitHandler } from 'react-hook-form'
 import { InMatchForm, useInMatchForm } from './useInMatchForm'
-import { loadMatchSummary, saveMatchDetails } from '~/data'
+import { deleteMatchDetails, loadMatchSummary, saveMatchDetails } from '~/data'
 import { GameClock, PlayerManagement } from '~/ui/Match'
 import { useTick } from '~/ui/hooks'
 import { MainPanel } from '~/ui/Layout'
 import { Button } from '~/ui/Input/Button'
 import { GameScore } from '~/ui/Match/GameScore'
+import { useState } from 'react'
 
 export function MatchForm({ matchId }: { matchId: string }) {
   const formProps = useInMatchForm({ matchId })
+  const [saveState, setSaveState] = useState(true)
   const navigate = useNavigate()
 
-  const { watch, setValue, handleSubmit } = formProps
+  const { watch, setValue, handleSubmit, reset } = formProps
 
   const matchSummary = loadMatchSummary(matchId)
 
@@ -21,7 +23,7 @@ export function MatchForm({ matchId }: { matchId: string }) {
 
   const save = () => {
     const matchUpdate = formProps.getValues()
-    if (matchUpdate) {
+    if (matchUpdate && saveState) {
       saveMatchDetails(matchUpdate)
     }
   }
@@ -32,6 +34,15 @@ export function MatchForm({ matchId }: { matchId: string }) {
     setValue('isGamePlaying', 'finished')
     save()
     navigate('/')
+  }
+
+  const resetForm = () => {
+    if (confirm('Are you sure you want to reset the game?')) {
+      deleteMatchDetails(matchId)
+      reset(undefined, { keepDefaultValues: true })
+      setSaveState(false)
+      navigate(`/match/${matchId}`)
+    }
   }
 
   let titleText = teamName
@@ -62,17 +73,18 @@ export function MatchForm({ matchId }: { matchId: string }) {
               opponentName={matchSummary?.opponentName ?? 'Opposition'}
             />
             <PlayerManagement />
-            <div className="relative size=16 w-full">
-              <div className="absolute left-4">
+            <div className="size=16 w-full justify-items-center text-center">
+              <div className="inline-block pr-4">
                 <Button
                   type="submit"
                   className="bg-brand-base2-100 rounded-lg p-4 font-bold, text-brand-base1-10"
                   children={'Finish Game'}
                 />
               </div>
-              <div className="absolute right-16">
+              <div className="inline-block ">
                 <Button
                   type="button"
+                  onClick={resetForm}
                   className="bg-brand-accent2 rounded-lg p-4 font-bold, text-brand-base1-10"
                   children={'Reset Game'}
                 />

@@ -102,3 +102,7 @@ export function loadInMatchDetails(matchId: string): InMatchForm | null {
 export function saveMatchDetails(match: InMatchForm): void {
   localStorage.setItem(match.id, JSON.stringify(match))
 }
+
+export function deleteMatchDetails(matchId: string): void {
+  localStorage.removeItem(matchId)
+}

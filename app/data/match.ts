@@ -29,6 +29,7 @@ export type Match = {
   gameClock: number
   teamScore: number
   opponentScore: number
+  date: Date
 }
 
 export function createMatch(matchSummary: MatchSummary, team: Team): Match {
@@ -47,5 +48,6 @@ export function createMatch(matchSummary: MatchSummary, team: Team): Match {
     gameClock: 0,
     teamScore: 0,
     opponentScore: 0,
+    date: new Date(),
   }
 }

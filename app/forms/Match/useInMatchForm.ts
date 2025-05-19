@@ -21,9 +21,10 @@ export function useInMatchForm({ matchId }: { matchId: string }) {
 
   if (matchSummary) {
     const team = loadTeam(matchSummary.teamId)
-    const newMatch = createMatch(matchSummary, team)
-
-    return useForm<InMatchForm>({ defaultValues: { ...newMatch, deltaTime: 0 } })
+    if (team) {
+      const newMatch = createMatch(matchSummary, team)
+      return useForm<InMatchForm>({ defaultValues: { ...newMatch, deltaTime: 0 } })
+    }
   }
 
   return useForm<InMatchForm>()
