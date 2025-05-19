@@ -1,17 +1,21 @@
 import { AllTeamConfigurations } from '~/data'
-import { NewTeam } from './useCreateTeamForm'
+import { NewTeam } from './useTeamForm'
 import { useFormContext } from 'react-hook-form'
 import { DropDown, DropDownElement } from '~/ui/Input/DropDown'
 import { ConfigurationDescription } from '~/ui/Teams/ConfigurationDescription'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '~/ui/Input/Button'
 import { InfoIcon } from '~/ui/Icons'
 
-export default function NewTeamConfiguration() {
+export default function TeamConfiguration({ defaultValue }: { defaultValue?: string }) {
   const { setValue, setError, clearErrors, watch } = useFormContext<NewTeam>()
   const [showConfig, setShowConfig] = useState(false)
 
   const config = watch('configuration', AllTeamConfigurations[0])
+
+  useEffect(() => {
+    defaultValue = config.id
+  }, [config])
 
   const isValidTeam = (teamId: string) => AllTeamConfigurations.some((team) => team.id === teamId)
 
@@ -22,7 +26,6 @@ export default function NewTeamConfiguration() {
     }
     const selectedTeam = AllTeamConfigurations.filter((team) => id == team.id)
     if (selectedTeam[0]) {
-      console.log(selectedTeam[0])
       setValue('configuration', selectedTeam[0])
       clearErrors()
     }
@@ -32,7 +35,8 @@ export default function NewTeamConfiguration() {
     id: team.id,
     value: team.id,
     label: team.name,
-    isSelected: () => team.id === config?.id,
+    isSelected: () =>
+      defaultValue !== undefined ? team.id == defaultValue : team.id === config?.id,
   }))
 
   const toggleConfigDescription = () => {
@@ -48,7 +52,11 @@ export default function NewTeamConfiguration() {
           <span className="font-bold pr-4 text-lg">Competition</span>
         </div>
         <div className="col-span-1">
-          <DropDown onChange={(e) => selectTeam(e.target.value)} values={configValues} />
+          <DropDown
+            defaultValue={defaultValue}
+            onChange={(e) => selectTeam(e.target.value)}
+            values={configValues}
+          />
           <Button onClick={toggleConfigDescription} className="justify-center">
             <InfoIcon size="15" />
           </Button>

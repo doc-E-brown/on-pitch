@@ -1,6 +1,8 @@
 import { Team } from './team'
 import { createMatchSummary, MatchSummary } from './match'
 import { InMatchForm } from 'app/forms/Match'
+import { TeamConfiguration } from './team'
+import { createPlayer } from './player'
 
 export function getListOfTeams(): Team[] {
   const allTeams = localStorage.getItem('teamsList')
@@ -8,6 +10,15 @@ export function getListOfTeams(): Team[] {
     return JSON.parse(allTeams) as Team[]
   }
   return []
+}
+
+export function getTeamById(teamId: string): Team | null {
+  const allTeams = getListOfTeams()
+  const team = allTeams.find((team) => team.id === teamId)
+  if (team) {
+    return team
+  }
+  return null
 }
 
 export function setListOfTeams(teams: Team[]): void {
@@ -32,6 +43,23 @@ export function loadTeam(teamId: string): Team | null {
     return team
   }
   return null
+}
+
+export function updateTeam(
+  teamId: string,
+  name: string,
+  players: string[],
+  configuration: TeamConfiguration,
+): void {
+  const allTeams = getListOfTeams()
+  const teamIndex = allTeams.findIndex((team) => team.id === teamId)
+  if (teamIndex !== -1) {
+    allTeams[teamIndex].name = name
+    // Maybe to do later is to maintain the player Ids, if we eventually care
+    allTeams[teamIndex].players = players.map((player: string) => createPlayer(player))
+    allTeams[teamIndex].configuration = configuration
+    setListOfTeams(allTeams)
+  }
 }
 
 export function getListOfMatches(): MatchSummary[] {

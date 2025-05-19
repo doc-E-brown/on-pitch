@@ -1,28 +1,28 @@
 import { useFormContext } from 'react-hook-form'
-import { NewTeam } from './useCreateTeamForm'
-import { useEffect, useState } from 'react'
+import { NewTeam } from './useTeamForm'
 import { TextInput } from '~/ui/Input/TextInput'
 import { Button } from '~/ui/Input/Button'
 import { joinClsx } from '~/lib/utils'
 import { FaPlusCircle } from 'react-icons/fa'
+import { useEffect } from 'react'
 
-export function NewTeamRoster({ teamSize }: { teamSize: number }) {
+export function TeamRoster({ teamSize }: { teamSize: number }) {
   const {
     setError,
     clearErrors,
     setValue,
     formState: { errors },
+    watch,
   } = useFormContext<NewTeam>()
 
-  const [roster, setRoster] = useState<Array<string>>([''])
+  const roster = watch('players', [''])
+  const teamConfiguration = watch('configuration')
 
   useEffect(() => {
-    setRoster((prev) => Array(teamSize).fill(''))
+    if (roster.length < teamSize) {
+      setValue('players', [...roster, ...Array(teamSize - roster.length).fill('')])
+    }
   }, [teamSize])
-
-  useEffect(() => {
-    setValue('players', roster)
-  }, [roster])
 
   const updateMemberName = (index: number, value: string) => {
     if (roster.includes(value) && value !== '') {
@@ -32,11 +32,12 @@ export function NewTeamRoster({ teamSize }: { teamSize: number }) {
     }
     const updatedRoster = [...roster]
     updatedRoster[index] = value
-    setRoster(updatedRoster)
+    setValue('players', updatedRoster)
   }
 
   const addTeamMember = () => {
-    setRoster((prev) => [...prev, ''])
+    const updatedRoster = [...roster, '']
+    setValue('players', updatedRoster)
   }
 
   return (

@@ -4,8 +4,7 @@ import { SelectTeam } from './SelectTeam'
 import { TextInput } from 'app/ui/Input/TextInput'
 import { addNewMatch } from 'app/data'
 import { joinClsx } from '~/lib/utils'
-import { useEffect } from 'react'
-import { HiUserGroup } from 'react-icons/hi'
+import { useEffect, useState } from 'react'
 import { GiSoccerField } from 'react-icons/gi'
 import { Button } from '~/ui/Input'
 
@@ -16,17 +15,23 @@ export type StartMatchFormProps = {
 
 export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
   const formProps = useNewMatchForm()
+  const [showErrors, setShowErrors] = useState(false)
   const {
     handleSubmit,
     register,
     formState: { errors },
     watch,
     setError,
+    clearErrors,
   } = formProps
 
   const opponentName = watch('opponentName', '')
 
   const doSubmit: SubmitHandler<NewMatch> = (data) => {
+    if (data.opponentName.length === 0 || data.opponentName === '') {
+      setShowErrors(true)
+      return
+    }
     if (!errors.teamId && !errors.opponentName) {
       const { teamId, opponentName } = data
       const newMatchId = addNewMatch(teamId, opponentName)
@@ -34,14 +39,22 @@ export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
     }
   }
 
+  // const isValidOpponentName = () => {
+  //   console.log('Here', opponentName.length, errors.opponentName)
+  //   if (opponentName.length > 0) {
+  //     clearErrors('opponentName')
+  //   } else {
+  //     setError('opponentName', {
+  //       type: 'manual',
+  //       message: 'Opponent name is required',
+  //     })
+  //   }
+  // }
+
   useEffect(() => {
-    if (opponentName.length > 0 && opponentName !== '') {
+    if (opponentName.length > 0) {
       formProps.clearErrors('opponentName')
-    } else {
-      setError('opponentName', {
-        type: 'manual',
-        message: 'Opponent name is required',
-      })
+      setShowErrors(false)
     }
   }, [opponentName])
 
@@ -55,29 +68,36 @@ export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
           </span>
         </div>
         <form onSubmit={handleSubmit(doSubmit)}>
-          <div className="grid flex-col grid-cols-2 p-2">
-            <SelectTeam />
+          <SelectTeam />
+          <div className="inline-block align-middle">
+            <span className="text-lg font-bold inline-block align-middle pr-8">Opponent</span>
           </div>
-          <div className="col-span-1 inline-block align-middle">
-            <span className="text-lg font-bold inline-block align-middle pr-10">Opponent</span>
-          </div>
-          <div className="col-span-1 inline-block align-middle justify-items-end items-end pl-4">
+          <div className="inline-block align-middle pl-4">
             <TextInput
-              {...register('opponentName', { required: true, maxLength: 15 })}
+              {...register('opponentName', {
+                required: {
+                  value: true,
+                  message: 'Opponent name is required',
+                },
+                maxLength: 15,
+              })}
               className={joinClsx(
                 'bg-brand-base1-10 text-brand-base2-100 pl-4',
                 errors.opponentName ? 'border-brand-accent1 text-brand-accent1' : '',
               )}
             />
-            {errors.opponentName && (
-              <div className="w-full text-brand-accent1 text-lg font-bold">
-                {errors.opponentName.message}
-              </div>
-            )}
           </div>
+          {errors.opponentName && (
+            <div className="w-full flex-col">
+              <div className="text-brand-accent1 text-lg font-bold text-right">
+                {errors.opponentName?.message}
+              </div>
+            </div>
+          )}
           <div className="w-full flex flex-col p-4">
             <Button
-              onClick={() => {}}
+              type="submit"
+              // onClick={isValidOpponentName}
               className="bg-brand-accent2 font-extrabold text-lg rounded-lg h-12"
             >
               {onSubmitText}

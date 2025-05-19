@@ -1,8 +1,6 @@
 import { Info } from './+types/MatchRoute'
 import { loadMatchSummary, loadTeam } from 'app/data'
 import { MatchForm } from 'app/forms/Match'
-import { TitlePanel } from '~/ui/Layout/TitlePanel'
-import { MainPanel } from '~/ui/Layout'
 
 export default function MatchRoute({ params: { matchId } }: Info) {
   const matchSummary = loadMatchSummary(matchId)

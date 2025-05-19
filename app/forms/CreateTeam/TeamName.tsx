@@ -1,11 +1,11 @@
 import { isTeamNameAvailable } from 'app/data'
 import { useFormContext } from 'react-hook-form'
-import { NewTeam } from './useCreateTeamForm'
+import { NewTeam } from './useTeamForm'
 import { useEffect } from 'react'
 import { TextInput } from 'app/ui/Input/TextInput'
 import { joinClsx } from '~/lib/utils'
 
-export function NewTeamName() {
+export function TeamName({ editMode = false }: { editMode?: boolean }) {
   const {
     register,
     setError,
@@ -16,10 +16,10 @@ export function NewTeamName() {
 
   const teamName = watch('name')
 
+  const nameIsValid = (value: string) => editMode || (!editMode && isTeamNameAvailable(value))
+
   useEffect(() => {
-    if (!isTeamNameAvailable(teamName)) {
-      setError('name', { type: 'manual', message: 'Team name already exists' })
-    } else {
+    if (nameIsValid(teamName)) {
       clearErrors('name')
     }
   }, [teamName])
@@ -42,8 +42,9 @@ export function NewTeamName() {
             {...register('name', {
               required: true,
               validate: {
-                isTeamNameAvailable: (value) =>
-                  isTeamNameAvailable(value) || 'Team name already exists',
+                isTeamNameAvailable: (value) => {
+                  return nameIsValid(value) || 'Team name already exists'
+                },
               },
             })}
           />

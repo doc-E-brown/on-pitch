@@ -32,15 +32,16 @@ export function SelectTeam() {
 
   return (
     <>
-      <div className="col-span-1">
-        <span className="font-bold pr-4 text-lg">Select Team</span>
-      </div>
-      <div className="col-span-1">
-        <span className="items-end inline-block">
+      <div className="pb-2">
+        <span className="font-bold text-lg align-middl pr-8">Select Team</span>
+        <span className="relative inline-block align-middle">
           <select
-            className="w-full flex flex-col p-1"
+            className="w-full p-1 rounded-lg w-24"
             {...register('teamId', {
-              required: true,
+              required: {
+                value: true,
+                message: 'Please select a team',
+              },
               validate: {
                 isValidTeam: (value) => isTeamIdValid(value) || 'Please select a team',
               },
@@ -57,7 +58,11 @@ export function SelectTeam() {
             })}
           </select>
         </span>
-        {errors.teamId && <span>{errors.teamId.message}</span>}
+        {errors.teamId && (
+          <div className="w-full text-brand-accent1 text-lg font-bold text-right">
+            {errors.teamId.message}
+          </div>
+        )}
       </div>
     </>
   )

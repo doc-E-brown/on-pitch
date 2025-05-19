@@ -47,7 +47,7 @@ export function MatchForm({ matchId }: { matchId: string }) {
   return (
     <FormProvider {...formProps}>
       <form onSubmit={handleSubmit(finishGame)}>
-        <div className="relative size-16 p-4 w-full bg-brand-base2-100 ">
+        <div className="size-16 p-4 w-full bg-brand-base2-100 ">
           <div className="absolute left-4 size-16 w-full overflow-hidden text-brand-base1-10 text-2xl font-extrabold">
             {titleText}
           </div>
@@ -55,8 +55,8 @@ export function MatchForm({ matchId }: { matchId: string }) {
             <GameClock initialClock={initialClock} />
           </div>
         </div>
-        <div clasName="relative flex w-full h-full overflow-x-hidden overflow-y-scroll">
-          <MainPanel>
+        <div className="relative flex w-full h-full overflow-x-hidden overflow-y-scroll">
+          <MainPanel className="w-full">
             <GameScore
               teamName={teamName}
               opponentName={matchSummary?.opponentName ?? 'Opposition'}
