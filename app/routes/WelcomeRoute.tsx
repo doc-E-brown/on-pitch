@@ -1,25 +1,10 @@
-import { useNavigate } from 'react-router'
 import { MainPanel, Banner } from '~/ui/Layout'
 import { TeamManagement, MatchManagement } from '~/ui/Welcome'
 import { getListOfTeams, getListOfMatches } from '~/data'
 
 export default function WelcomeRoute() {
-  const navigate = useNavigate()
-
   const aTeamExists = getListOfTeams().length > 0
   const aMatchExists = getListOfMatches().length > 0
-
-  function handleCreateNewTeam() {
-    navigate('/team/new')
-  }
-
-  function handleNewMatch() {
-    navigate('/match/new')
-  }
-
-  function loadMatch() {
-    navigate
-  }
 
   return (
     <div>

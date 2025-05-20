@@ -36,7 +36,7 @@ export function TeamForm({ teamId }: { teamId?: string }) {
     if (config) {
       const numPlayers = config?.playersOnField ?? 0
       const numReserves = config?.maximumReserves ?? 0
-      setTeamSize((prev) => numPlayers + numReserves)
+      setTeamSize(numPlayers + numReserves)
     }
   }, [config])
 
@@ -49,7 +49,7 @@ export function TeamForm({ teamId }: { teamId?: string }) {
       }
     }
     setReadyForSubmit(false)
-  }, [config, players, teamName])
+  }, [config, players, teamName, errors])
 
   const onSubmit: SubmitHandler<NewTeam> = (data) => {
     if (!errors.name && !errors.players && !errors.configuration && readyToSubmit) {
@@ -61,7 +61,7 @@ export function TeamForm({ teamId }: { teamId?: string }) {
         updateTeam(teamId, data.name, players, data.configuration)
       }
 
-      navigate('..')
+      void navigate('..')
     }
   }
 
@@ -70,13 +70,16 @@ export function TeamForm({ teamId }: { teamId?: string }) {
       const allTeams = getListOfTeams()
       const newTeams = allTeams.filter((team) => team.id !== teamId)
       setListOfTeams(newTeams)
-      navigate('..')
+      void navigate('..')
     }
   }
 
   return (
     <FormProvider {...formProps}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TeamName editMode={teamId !== undefined} />
         <TeamConfiguration defaultValue={teamId !== undefined ? config.id : undefined} />
         <TeamRoster teamSize={teamSize} />
@@ -92,7 +95,7 @@ export function TeamForm({ teamId }: { teamId?: string }) {
           <>
             <div className="h-8 w-full flex"></div>
             <div className="w-full flex flex-col rounded-lg p-4 text-brand-base1-10 font-bold bg-brand-accent1">
-              <button type="button" onClick={() => deleteTeam(teamId)}>
+              <button type="button" onClick={() => deleteTeam(teamId ?? '')}>
                 Delete Team
               </button>
             </div>

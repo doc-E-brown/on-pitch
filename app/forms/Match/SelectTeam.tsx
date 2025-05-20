@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { getListOfTeams } from '../../data'
+import { useCallback, useEffect } from 'react'
+import { getListOfTeams } from '~/data'
 import { useFormContext } from 'react-hook-form'
 import { NewMatch } from './useNewMatchForm'
 
@@ -14,11 +14,14 @@ export function SelectTeam() {
   } = formProps
   const listOfTeams = getListOfTeams()
 
-  const isTeamIdValid = (teamId: string) => {
-    return listOfTeams.some((team) => {
-      return teamId === team.id
-    })
-  }
+  const isTeamIdValid = useCallback(
+    (teamId: string) => {
+      return listOfTeams.some((team) => {
+        return teamId === team.id
+      })
+    },
+    [listOfTeams],
+  )
 
   const teamId = watch('teamId')
 
@@ -28,7 +31,7 @@ export function SelectTeam() {
     } else {
       clearErrors('teamId')
     }
-  }, [teamId])
+  }, [teamId, clearErrors, setError])
 
   return (
     <>

@@ -16,13 +16,12 @@ export function TeamRoster({ teamSize }: { teamSize: number }) {
   } = useFormContext<NewTeam>()
 
   const roster = watch('players', [''])
-  const teamConfiguration = watch('configuration')
 
   useEffect(() => {
     if (roster.length < teamSize) {
-      setValue('players', [...roster, ...Array(teamSize - roster.length).fill('')])
+      setValue('players', [...roster, ...Array<string>(teamSize - roster.length).fill('')])
     }
-  }, [teamSize])
+  }, [teamSize, roster, setValue])
 
   const updateMemberName = (index: number, value: string) => {
     if (roster.includes(value) && value !== '') {

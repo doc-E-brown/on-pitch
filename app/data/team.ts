@@ -91,7 +91,7 @@ export function createTeam(
   playerNames: string[],
   configuration: TeamConfiguration,
 ): Team {
-  const players = playerNames.map((playerName, index) => createPlayer(playerName))
+  const players = playerNames.map((playerName) => createPlayer(playerName))
   return {
     name,
     players,

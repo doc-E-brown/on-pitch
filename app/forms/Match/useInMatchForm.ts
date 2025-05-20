@@ -8,12 +8,11 @@ export type InMatchForm = Match & {
 export function useInMatchForm({ matchId }: { matchId: string }) {
   // Load the match details from the data store
   const match = loadInMatchDetails(matchId)
+  let defaultValues = {}
 
   if (match) {
     // If the match exists, return the form with the default values
-    return useForm<InMatchForm>({
-      defaultValues: { ...match, deltaTime: 0 },
-    })
+    defaultValues = { defaultValues: { ...match, deltaTime: 0 } }
   }
 
   // If the match does not exist, create it
@@ -23,9 +22,9 @@ export function useInMatchForm({ matchId }: { matchId: string }) {
     const team = loadTeam(matchSummary.teamId)
     if (team) {
       const newMatch = createMatch(matchSummary, team)
-      return useForm<InMatchForm>({ defaultValues: { ...newMatch, deltaTime: 0 } })
+      defaultValues = { defaultValues: { ...newMatch, deltaTime: 0 } }
     }
   }
 
-  return useForm<InMatchForm>()
+  return useForm<InMatchForm>(defaultValues)
 }

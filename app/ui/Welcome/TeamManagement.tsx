@@ -11,11 +11,11 @@ export function TeamManagement() {
   const allTeams = getListOfTeams()
 
   const createTeam = () => {
-    navigate('/team')
+    void navigate('/team')
   }
 
   const editTeam = (teamId: string) => {
-    navigate(`/team/${teamId}`)
+    void navigate(`/team/${teamId}`)
   }
 
   return (
@@ -37,6 +37,7 @@ export function TeamManagement() {
                 return (
                   <>
                     <Button
+                      key={team.id}
                       className="w-full flex rounded-2xl p-2 bg-brand-base2-10 justify-center"
                       onClick={() => {
                         editTeam(team.id)

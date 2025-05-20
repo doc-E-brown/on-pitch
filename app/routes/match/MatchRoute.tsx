@@ -15,13 +15,6 @@ export default function MatchRoute({ params: { matchId } }: Info) {
     return <div>Team not found</div>
   }
 
-  let matchTitle = ''
-  if (matchSummary.opponentName) {
-    matchTitle = `${team.name} vs ${matchSummary.opponentName}`
-  } else {
-    matchTitle = `${team.name} ${new Date(matchSummary.date).toDateString()}`
-  }
-
   return (
     <div className="overflow-x-hidden h-full overflow-y-scroll">
       <MatchForm matchId={matchId} />

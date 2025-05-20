@@ -5,6 +5,7 @@ import { loadTeam } from '~/data'
 
 export default function TeamRoute({ params: { teamId } }: Info) {
   if (teamId) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const team = loadTeam(teamId)
     if (team == null) {
       return (
@@ -20,16 +21,16 @@ export default function TeamRoute({ params: { teamId } }: Info) {
     }
   }
 
-  const newTeam = teamId == undefined
   return (
     <div className="overflow-x-hidden">
       <Banner>
-        <div className="text-brand-base1-10 text-2xl">
-          {Boolean(teamId) ? 'Edit' : 'Create New'} Team
-        </div>
+        <div className="text-brand-base1-10 text-2xl">{teamId ? 'Edit' : 'Create New'} Team</div>
       </Banner>
       <MainPanel>
-        <TeamForm teamId={teamId} />
+        <TeamForm
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          teamId={teamId}
+        />
       </MainPanel>
     </div>
   )

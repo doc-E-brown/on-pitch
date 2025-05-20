@@ -6,7 +6,7 @@ export default function CreateNewMatchRoute() {
   const navigate = useNavigate()
 
   const handleCreateNewMatch = (id: string) => {
-    navigate(`/match/${id}`)
+    void navigate(`/match/${id}`)
   }
 
   return (

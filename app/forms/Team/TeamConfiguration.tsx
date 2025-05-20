@@ -3,7 +3,7 @@ import { NewTeam } from './useTeamForm'
 import { useFormContext } from 'react-hook-form'
 import { DropDown, DropDownElement } from '~/ui/Input/DropDown'
 import { ConfigurationDescription } from '~/ui/Teams/ConfigurationDescription'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '~/ui/Input/Button'
 import { InfoIcon } from '~/ui/Icons'
 
@@ -12,10 +12,6 @@ export default function TeamConfiguration({ defaultValue }: { defaultValue?: str
   const [showConfig, setShowConfig] = useState(false)
 
   const config = watch('configuration', AllTeamConfigurations[0])
-
-  useEffect(() => {
-    defaultValue = config.id
-  }, [config])
 
   const isValidTeam = (teamId: string) => AllTeamConfigurations.some((team) => team.id === teamId)
 
@@ -35,8 +31,6 @@ export default function TeamConfiguration({ defaultValue }: { defaultValue?: str
     id: team.id,
     value: team.id,
     label: team.name,
-    isSelected: () =>
-      defaultValue !== undefined ? team.id == defaultValue : team.id === config?.id,
   }))
 
   const toggleConfigDescription = () => {

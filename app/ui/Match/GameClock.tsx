@@ -3,7 +3,6 @@ import { useFormContext } from 'react-hook-form'
 import { InMatchForm } from '~/forms/Match'
 import { timeToString } from '~/lib/utils'
 import { useTick } from '~/ui/hooks'
-import { Button } from '~/ui/Input/Button'
 import { HiMiniPlayPause } from 'react-icons/hi2'
 
 export type GameClockProps = {

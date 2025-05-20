@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { GoalKeeper } from '~/ui/Icons'
 import { joinClsx } from '~/lib/utils'
 
 export type PlayerStateSectionProps = {

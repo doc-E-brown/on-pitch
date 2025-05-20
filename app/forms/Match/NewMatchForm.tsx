@@ -39,7 +39,7 @@ export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
     if (opponentName.length > 0) {
       formProps.clearErrors('opponentName')
     }
-  }, [opponentName])
+  }, [opponentName, formProps])
 
   return (
     <FormProvider {...formProps}>
@@ -50,7 +50,10 @@ export function NewMatchForm({ onSubmit, onSubmitText }: StartMatchFormProps) {
             Start New Match
           </span>
         </div>
-        <form onSubmit={handleSubmit(doSubmit)}>
+        <form
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          onSubmit={handleSubmit(doSubmit)}
+        >
           <SelectTeam />
           <div className="inline-block align-middle">
             <span className="text-lg font-bold inline-block align-middle pr-8">Opponent</span>

@@ -18,16 +18,8 @@ export function Unavailable({
   onKeeperAction,
   playWithKeeper,
 }: UnavailableComponentProps) {
-  const allAvailable = () => {
-    playerStates.forEach((state) => {
-      onFieldAction(state.player)
-    })
-  }
   return (
     <PlayerStateSection title={'Unavailable'} icon={''}>
-      {/*<p className="p-4">*/}
-      {/*  <button onClick={allAvailable}>All Available</button>*/}
-      {/*</p>*/}
       {playerStates
         .filter((state) => state.status === 'isUnavailable')
         .map((state) => {

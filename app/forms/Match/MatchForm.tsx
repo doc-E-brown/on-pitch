@@ -30,10 +30,10 @@ export function MatchForm({ matchId }: { matchId: string }) {
 
   useTick(1000, save)
 
-  const finishGame: SubmitHandler<InMatchForm> = (data) => {
+  const finishGame: SubmitHandler<InMatchForm> = () => {
     setValue('isGamePlaying', 'finished')
     save()
-    navigate('/')
+    void navigate('/')
   }
 
   const resetForm = () => {
@@ -41,7 +41,7 @@ export function MatchForm({ matchId }: { matchId: string }) {
       deleteMatchDetails(matchId)
       reset(undefined, { keepDefaultValues: true })
       setSaveState(false)
-      navigate(`/match/${matchId}`)
+      void navigate(`/match/${matchId}`)
     }
   }
 
@@ -57,7 +57,10 @@ export function MatchForm({ matchId }: { matchId: string }) {
 
   return (
     <FormProvider {...formProps}>
-      <form onSubmit={handleSubmit(finishGame)}>
+      <form
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onSubmit={handleSubmit(finishGame)}
+      >
         <div className="size-16 p-4 w-full bg-brand-base2-100 ">
           <div className="absolute left-4 size-16 w-full overflow-hidden text-brand-base1-10 text-2xl font-extrabold">
             {titleText}

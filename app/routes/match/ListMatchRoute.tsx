@@ -4,7 +4,7 @@ export default function ListMatchRoute() {
   const allMatches: MatchSummary[] = getListOfMatches()
   const teams: Team[] = getListOfTeams()
 
-  let teamNames: Record<string, string> = {}
+  const teamNames: Record<string, string> = {}
   teams.forEach((team) => {
     teamNames[team.id] = team.name
   })

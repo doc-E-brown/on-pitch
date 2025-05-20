@@ -6,7 +6,7 @@ export default [
   ...prefix('team', [route('/:teamId?', './routes/team/TeamRoute.tsx')]),
   ...prefix('match', [
     route('/new', './routes/match/CreateNewMatchRoute.tsx'),
-    route('/:matchId?', './routes/match/MatchRoute.tsx'),
+    route('/:matchId', './routes/match/MatchRoute.tsx'),
   ]),
   route('*', 'NotFound.tsx'),
 ] satisfies RouteConfig

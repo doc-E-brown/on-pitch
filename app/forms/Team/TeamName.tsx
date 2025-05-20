@@ -1,14 +1,13 @@
 import { isTeamNameAvailable } from 'app/data'
 import { useFormContext } from 'react-hook-form'
 import { NewTeam } from './useTeamForm'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { TextInput } from 'app/ui/Input/TextInput'
 import { joinClsx } from '~/lib/utils'
 
 export function TeamName({ editMode = false }: { editMode?: boolean }) {
   const {
     register,
-    setError,
     clearErrors,
     watch,
     formState: { errors },
@@ -16,13 +15,16 @@ export function TeamName({ editMode = false }: { editMode?: boolean }) {
 
   const teamName = watch('name')
 
-  const nameIsValid = (value: string) => editMode || (!editMode && isTeamNameAvailable(value))
+  const nameIsValid = useCallback(
+    (value: string) => editMode || (!editMode && isTeamNameAvailable(value)),
+    [editMode],
+  )
 
   useEffect(() => {
     if (nameIsValid(teamName)) {
       clearErrors('name')
     }
-  }, [teamName])
+  }, [teamName, clearErrors, nameIsValid])
 
   return (
     <div className="justify-center relative pb-4">

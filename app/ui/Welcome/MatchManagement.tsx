@@ -11,11 +11,11 @@ export function MatchManagement() {
   const allMatches = getListOfMatches()
 
   const startNewMatch = () => {
-    navigate('/match/new')
+    void navigate('/match/new')
   }
 
   const loadMatch = (matchId: string) => {
-    navigate(`/match/${matchId}`)
+    void navigate(`/match/${matchId}`)
   }
 
   return (
