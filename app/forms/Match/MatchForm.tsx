@@ -41,7 +41,7 @@ export function MatchForm({ matchId }: { matchId: string }) {
       deleteMatchDetails(matchId)
       reset(undefined, { keepDefaultValues: true })
       setSaveState(false)
-      void navigate(`/match/${matchId}`)
+      void navigate(0)
     }
   }
 
