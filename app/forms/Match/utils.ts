@@ -5,7 +5,7 @@ export function isFieldFull(
   configuration: TeamConfiguration,
 ): boolean {
   const playersOnField = playerStates.filter((state) => state.status === 'isOnField').length
-  return playersOnField >= configuration.playersOnField
+  return playersOnField >= configuration.playersOnField - (configuration.playWithKeeper ? 1 : 0)
 }
 
 export function isKeeperAssigned(
