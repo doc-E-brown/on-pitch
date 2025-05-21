@@ -1,6 +1,7 @@
 import { MainPanel, Banner } from '~/ui/Layout'
 import { TeamManagement, MatchManagement } from '~/ui/Welcome'
 import { getListOfTeams, getListOfMatches } from '~/data'
+import { FaQuestionCircle } from 'react-icons/fa'
 
 export default function WelcomeRoute() {
   const aTeamExists = getListOfTeams().length > 0
@@ -8,11 +9,7 @@ export default function WelcomeRoute() {
 
   return (
     <div>
-      <Banner>
-        <div className="text-brand-base1-10 w-full justify-items-center text-center text-3xl">
-          ON PITCH
-        </div>
-      </Banner>
+      <Banner children="ON-PITCH" />
       <MainPanel>
         <div className={'w-full p-4 rounded-lg '}>
           On-Pitch is designed to help football coaches manage their teams during a match. On-Pitch
@@ -32,6 +29,7 @@ export default function WelcomeRoute() {
           </div>
         )}
         {aTeamExists && <MatchManagement />}
+        <div className="h-8"></div>
       </MainPanel>
     </div>
   )
