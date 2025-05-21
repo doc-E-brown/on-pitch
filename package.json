@@ -1,6 +1,7 @@
 {
   "name": "on-pitch",
   "private": true,
+  "version": "0.0.0",
   "homepage": "https://doc-e-brown.github.io/on-pitch",
   "type": "module",
   "scripts": {
