@@ -1,8 +1,7 @@
 name: prepare-release.yml
 on:
   push:
-    branches: [ configure-knope ]
-#    branches: [ main ]
+    branches: [ main ]
 
 jobs:
   prepare-release:
