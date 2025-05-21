@@ -30,7 +30,7 @@ jobs:
           git push --force --set-upstream origin release
       - run: knope create-pr --verbose
         env:
-          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
 
 
 
