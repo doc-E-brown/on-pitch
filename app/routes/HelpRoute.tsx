@@ -39,13 +39,13 @@ export default function HelpRoute() {
           <h1>Table Of Contents</h1>
           <ul className="list-inside list-disc">
             <li className="font-bold">
-              <a href="#GettingStarted">Getting Started</a>
+              <a href={'#GettingStarted'}>Getting Started</a>
             </li>
             <li className="font-bold">
-              <a href="#CreatingATeam">Creating A Team</a>
+              <a href={'#CreatingATeam'}>Creating A Team</a>
             </li>
             <li className="font-bold">
-              <a href="#StartingAMatch">Starting A Match</a>
+              <a href={'#StartingAMatch'}>Starting A Match</a>
               <li className="pl-4 font-bold">
                 <a href={'#GameClock'}>Game Clock</a>
               </li>
@@ -72,7 +72,10 @@ export default function HelpRoute() {
               </li>
             </li>
             <li className="font-bold">
-              <a href="#DataMgmt">Data Management</a>
+              <a href={'#EgMatch'}>Example Match</a>
+            </li>
+            <li className="font-bold">
+              <a href={'#DataMgmt'}>Data Management</a>
             </li>
           </ul>
           <h1 id="GettingStarted">Getting Started</h1>
@@ -221,7 +224,7 @@ export default function HelpRoute() {
           <h2 id={'PlayerCards'}>Player Cards</h2>
           <p>
             Each player is represented by a player card, which is used track/change the playing
-            status of a player as well as their gamet ime and number of made substitutions.
+            status of a player as well as their game time and number of made substitutions.
             <ShowImage src={'PlayerCard.png'} alt={'PlayerCard'} />
             Each player card is made up of three main sections, in order from left to right:
             <ol className={'list-decimal list-inside'}>
@@ -259,6 +262,8 @@ export default function HelpRoute() {
             match will be in the same state as before it started.
             <ShowImage src={'FinishResetMatch.png'} alt={'FinishResetMatch'} />
           </p>
+          <h1 id={'EgMatch'}>Example Match</h1>
+          <ShowImage src={'ExampleMatch.gif'} alt={'ExampleMatch'} />
           <h1 id={'DataMgmt'}>Data Management</h1>
           <p>
             All data is stored locally on the device and within the browser. At no stage is any of
