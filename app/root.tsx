@@ -28,10 +28,14 @@ export function Layout({ children }: { children: ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-        <Footer>footer</Footer>
+        <div class={'flex flex-col min-h-screen'}>
+          <main className={'flex-grow'}>
+            {children}
+            <ScrollRestoration />
+            <Scripts />
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   )

@@ -1,7 +1,7 @@
-redirectsOrigin = "config"
-plugins = []
 functionsDirectory = "/home/ben/Workspace/on-pitch/netlify/functions"
 functionsDirectoryOrigin = "config-v1"
+redirectsOrigin = "config"
+plugins = []
 headers = []
 
 [functions]

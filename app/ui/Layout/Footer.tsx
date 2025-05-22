@@ -17,7 +17,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="p-4 w-full bg-brand-base2-100 text-brand-base1-10">
+    <footer className="h-16 p-4 w-full bg-brand-base2-100 text-brand-base1-10">
       <div className="flex w-full">
         <div className="w-1/3 flex flex-row flex-1 align-middle justify-center items-center">
           <button type="button" onClick={handleBack}>

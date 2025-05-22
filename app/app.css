@@ -8,16 +8,22 @@
         font-size: var(--text-2xl);
         font-weight: bold;
         color: var(--color-brand-base2-100);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
     h2 {
         font-size: var(--text-xl);
         font-weight: bold;
         color: var(--color-brand-base2-100);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
     h3 {
         font-size: var(--text-lg);
         font-weight: bold;
         color: var(--color-white);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
     select {
         background-color: var(--color-brand-base1-10);
@@ -26,6 +32,10 @@
     select option {
         background-color: var(--color-brand-base1-10);
         color: var(--color-brand-base2-100);
+    }
+
+    ol.list-decimal-bold > li::marker {
+        font-weight: bold;
     }
 }
 

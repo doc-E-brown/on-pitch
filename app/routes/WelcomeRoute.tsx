@@ -1,7 +1,6 @@
 import { MainPanel, Banner } from '~/ui/Layout'
 import { TeamManagement, MatchManagement } from '~/ui/Welcome'
 import { getListOfTeams, getListOfMatches } from '~/data'
-import { FaQuestionCircle } from 'react-icons/fa'
 
 export default function WelcomeRoute() {
   const aTeamExists = getListOfTeams().length > 0
