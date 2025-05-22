@@ -86,7 +86,7 @@ export function TeamForm({ teamId }: { teamId?: string }) {
         <div
           className={joinClsx(
             'w-full flex flex-col rounded-lg p-4 text-brand-base1-10 font-bold',
-            readyToSubmit ? 'bg-brand-base2-100' : 'bg-brand-brown',
+            readyToSubmit ? 'bg-brand-base2-100' : 'bg-brand-base2-10',
           )}
         >
           <button type="submit">{teamId !== undefined ? 'Save' : 'Create'} Team</button>

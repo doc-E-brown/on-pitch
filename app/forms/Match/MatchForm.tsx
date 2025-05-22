@@ -88,7 +88,7 @@ export function MatchForm({ matchId }: { matchId: string }) {
                 <Button
                   type="button"
                   onClick={resetForm}
-                  className="bg-brand-accent2 rounded-lg p-4 font-bold, text-brand-base1-10"
+                  className="bg-brand-accent1 rounded-lg p-4 font-bold, text-brand-base1-10"
                   children={'Reset Game'}
                 />
               </div>

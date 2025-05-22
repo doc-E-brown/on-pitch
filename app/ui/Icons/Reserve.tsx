@@ -6,7 +6,7 @@ export function Reserve({
   className,
 }: {
   subCount?: number
-  size?: string
+  size?: string | number
   className?: string
 }) {
   const haveSubCount = subCount !== undefined

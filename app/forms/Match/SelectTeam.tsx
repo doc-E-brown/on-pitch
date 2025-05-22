@@ -39,7 +39,7 @@ export function SelectTeam() {
         <span className="font-bold text-lg align-middl pr-8">Select Team</span>
         <span className="relative inline-block align-middle">
           <select
-            className="w-full p-1 rounded-lg w-24"
+            className="w-full p-1 rounded-lg"
             {...register('teamId', {
               required: {
                 value: true,

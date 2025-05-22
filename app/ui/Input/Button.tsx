@@ -5,11 +5,13 @@ export function Button({
   onClick,
   className,
   type,
+  disabled,
 }: {
   children: ReactNode
   className?: string
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
 }) {
   return (
     <button
@@ -19,6 +21,7 @@ export function Button({
         className ??
         'bg-brand-base2-100 text-brand-base1-10 rounded-2xl p-2 font-bold justify-center items-center'
       }
+      disabled={disabled}
     >
       {children}
     </button>

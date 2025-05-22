@@ -3,6 +3,7 @@ import { type RouteConfig, index, prefix, route } from '@react-router/dev/routes
 export default [
   index('./routes/HomeRoute.tsx'),
   route('/welcome', './routes/WelcomeRoute.tsx'),
+  route('/help', './routes/HelpRoute.tsx'),
   ...prefix('team', [route('/:teamId?', './routes/team/TeamRoute.tsx')]),
   ...prefix('match', [
     route('/new', './routes/match/CreateNewMatchRoute.tsx'),
