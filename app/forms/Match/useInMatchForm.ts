@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { createMatch, loadInMatchDetails, loadMatchSummary, loadTeam, Match } from 'app/data'
+import { createMatch, loadInMatchDetails, loadMatchSummary, loadTeam, Match } from '~/data'
 
 export type InMatchForm = Match & {
   deltaTime: number
