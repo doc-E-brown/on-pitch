@@ -1,4 +1,4 @@
-import { Player, PlayerState, PlayerStatus } from '../data'
+import { Player, PlayerState, PlayerStatus } from '~/data'
 
 export default function ChangePlayerStatus(
   player: Player,
