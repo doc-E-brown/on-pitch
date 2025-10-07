@@ -1,7 +1,7 @@
 {
   "name": "on-pitch",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://doc-e-brown.github.io/on-pitch",
   "type": "module",
   "scripts": {
@@ -13,7 +13,7 @@
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "netlify deploy"
   },
   "dependencies": {
     "@react-router/node": "7.6.0",

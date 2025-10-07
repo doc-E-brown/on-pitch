@@ -76,6 +76,30 @@ export const MiniRoosU11Configuration = {
   id: 'miniRoosU11',
 }
 
+export const JuniorSummerSixes: TeamConfiguration = {
+  playersOnField: 6,
+  playWithKeeper: true,
+  maximumReserves: 4,
+  timePerPeriod: 20, // minutes
+  breakTime: 5,
+  name: 'Junior Summer Sixes',
+  id: 'jnrSummerSixes'
+}
+
+export const SeniorSummerSixes: TeamConfiguration = {
+  ...JuniorSummerSixes,
+  name: 'Senior Summer Sixes',
+  id: 'snrSummerSixes'
+}
+
+export const MiniRoosSummerSixes: TeamConfiguration = {
+  ...JuniorSummerSixes,
+  timePerPeriod: 15,
+  name: 'MiniRoos Summer Sixes',
+  id: 'miniSummerSixes'
+}
+
+
 export const AllTeamConfigurations = [
   MiniRoosU6Configuration,
   MiniRoosU7Configuration,
@@ -84,6 +108,9 @@ export const AllTeamConfigurations = [
   MiniRoosU10Configuration,
   MiniRoosU11Configuration,
   OpenConfiguration,
+  JuniorSummerSixes,
+  SeniorSummerSixes,
+  MiniRoosSummerSixes,
 ]
 
 export function createTeam(
